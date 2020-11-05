@@ -28,3 +28,12 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    eventbusVersion = '3.1.1'
+    circleimageviewVersion = '2.2.0'
+    butterknifeVersion = '10.1.0'
+    retrofitVersion = '2.2.0'
+    animationsVersion = '1.0.0'
+    fastscrollVersion = '0.2.5'
+}
