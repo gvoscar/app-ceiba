@@ -1,4 +1,4 @@
-package co.com.ceiba.mobile.pruebadeingreso.libs.eventbus;
+package co.com.ceiba.mobile.pruebadeingreso.libs.base;
 
 
 public interface EventBus {

@@ -8,8 +8,8 @@ import co.com.ceiba.mobile.pruebadeingreso.features.posts.events.PostEvent;
 import co.com.ceiba.mobile.pruebadeingreso.features.posts.interactos.PostInteractor;
 import co.com.ceiba.mobile.pruebadeingreso.features.posts.interactos.PostInteractorImpl;
 import co.com.ceiba.mobile.pruebadeingreso.features.posts.ui.PostView;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.EventBus;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.GreenRobotEventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.EventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.GreenRobotEventBus;
 import co.com.ceiba.mobile.pruebadeingreso.pojos.Post;
 
 public class PostPresenterImpl implements PostPresenter {

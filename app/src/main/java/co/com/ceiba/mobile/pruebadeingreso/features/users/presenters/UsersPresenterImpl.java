@@ -8,8 +8,8 @@ import co.com.ceiba.mobile.pruebadeingreso.features.users.events.UsersEvent;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.interactors.UsersInteractor;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.interactors.UsersInteractorImpl;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.ui.UsersView;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.EventBus;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.GreenRobotEventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.EventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.GreenRobotEventBus;
 import co.com.ceiba.mobile.pruebadeingreso.pojos.User;
 
 public class UsersPresenterImpl implements UsersPresenter {
@@ -18,10 +18,12 @@ public class UsersPresenterImpl implements UsersPresenter {
     private UsersView view;
     private UsersInteractor interactor;
 
-    public UsersPresenterImpl(UsersView view) {
-        this.eventBus = GreenRobotEventBus.getInstance();
+    public UsersPresenterImpl(EventBus eventBus, UsersView view, UsersInteractor interactor) {
+        // this.eventBus = GreenRobotEventBus.getInstance();
+        this.eventBus = eventBus;
         this.view = view;
-        this.interactor = new UsersInteractorImpl();
+        // this.interactor = new UsersInteractorImpl();
+        this.interactor = interactor;
     }
 
     @Override

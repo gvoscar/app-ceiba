@@ -1,4 +1,4 @@
-package co.com.ceiba.mobile.pruebadeingreso.libs.glide;
+package co.com.ceiba.mobile.pruebadeingreso.libs.base;
 
 import android.widget.ImageView;
 

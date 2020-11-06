@@ -5,18 +5,20 @@ import android.util.Log;
 import java.util.List;
 
 import co.com.ceiba.mobile.pruebadeingreso.database.MyDatabase;
-import co.com.ceiba.mobile.pruebadeingreso.features.loader.events.LoaderEvent;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.events.UsersEvent;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.GreenRobotEventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.EventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.GreenRobotEventBus;
 import co.com.ceiba.mobile.pruebadeingreso.pojos.User;
 
 public class UsersRepositoryImpl implements UsersRepository {
 
     private static final String TAG = UsersRepositoryImpl.class.getSimpleName();
     private MyDatabase database;
+    private EventBus eventBus;
 
-    public UsersRepositoryImpl() {
-        database = MyDatabase.getInstance();
+    public UsersRepositoryImpl(MyDatabase database, EventBus eventBus) {
+        this.database = database;
+        this.eventBus = eventBus;
     }
 
     @Override
@@ -49,6 +51,7 @@ public class UsersRepositoryImpl implements UsersRepository {
         event.setMessage(message);
         event.setUsers(users);
 
-        GreenRobotEventBus.getInstance().post(event);
+        //GreenRobotEventBus.getInstance().post(event);
+        this.eventBus.post(event);
     }
 }

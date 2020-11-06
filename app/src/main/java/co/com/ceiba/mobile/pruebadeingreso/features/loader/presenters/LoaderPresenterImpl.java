@@ -9,8 +9,8 @@ import co.com.ceiba.mobile.pruebadeingreso.features.loader.events.LoaderEvent;
 import co.com.ceiba.mobile.pruebadeingreso.features.loader.interactors.LoaderInteractor;
 import co.com.ceiba.mobile.pruebadeingreso.features.loader.interactors.LoaderInteractorImpl;
 import co.com.ceiba.mobile.pruebadeingreso.features.loader.ui.LoaderView;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.EventBus;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.GreenRobotEventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.EventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.GreenRobotEventBus;
 
 public class LoaderPresenterImpl implements LoaderPresenter {
 

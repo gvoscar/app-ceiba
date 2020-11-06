@@ -7,8 +7,9 @@ public class UsersInteractorImpl implements UsersInteractor {
 
     private UsersRepository repository;
 
-    public UsersInteractorImpl() {
-        repository = new UsersRepositoryImpl();
+    public UsersInteractorImpl(UsersRepository repository) {
+        // repository = new UsersRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override

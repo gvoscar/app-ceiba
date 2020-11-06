@@ -1,16 +1,19 @@
-package co.com.ceiba.mobile.pruebadeingreso.libs.eventbus;
+package co.com.ceiba.mobile.pruebadeingreso.libs.base;
+
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.EventBus;
 
 public class GreenRobotEventBus implements EventBus {
     private org.greenrobot.eventbus.EventBus eventBus;
 
     public GreenRobotEventBus() {
         this.eventBus = org.greenrobot.eventbus.EventBus.getDefault();
+        //this.eventBus = eventBus;
     }
 
     private static class SingletonHolder {
         private static final GreenRobotEventBus INSTANCE = new GreenRobotEventBus();
     }
-    
+
     public static GreenRobotEventBus getInstance() {
         return SingletonHolder.INSTANCE;
     }

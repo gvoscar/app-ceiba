@@ -30,10 +30,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
     private List<User> data;
 
-    public UsersAdapter(UsersAdapterListener listener) {
-        this.users = new ArrayList<>();
+    public UsersAdapter(List<User> users, UsersAdapterListener listener) {
+        // this.users = new ArrayList<>();
+        this.users = users;
         this.listener = listener;
-        this.data = new ArrayList<>();
+        // this.data = new ArrayList<>();
+        this.data = users;
     }
 
     @NonNull
@@ -58,7 +60,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         return users.size();
     }
 
-    public void data(List<User> data) {
+    public void setData(List<User> data) {
         this.data = data;
         addAll(data);
     }
@@ -83,14 +85,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public void notFound(){
+    public void notFound() {
 
     }
 
     public void getFilter(CharSequence constraint) {
         Log.d(TAG, "getFilter().    FILTRAR : " + constraint);
         clear();
-        if (constraint.length() <= 0){
+        if (constraint.length() <= 0) {
             Log.d(TAG, "getAutocomplete().    RESTABLECER ");
             addAll(data);
             return;
@@ -103,7 +105,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         }
 
         Log.d(TAG, "getAutocomplete().    COINCIDENCIAS : " + getItemCount());
-        if (getItemCount() <= 0){
+        if (getItemCount() <= 0) {
             // notFound();
         }
     }

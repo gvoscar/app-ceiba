@@ -9,12 +9,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,9 +20,13 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.com.ceiba.mobile.pruebadeingreso.R;
+import co.com.ceiba.mobile.pruebadeingreso.app.base.MyApp;
 import co.com.ceiba.mobile.pruebadeingreso.features.posts.ui.PostActivity;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.adapters.UsersAdapter;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.adapters.UsersAdapterListener;
@@ -45,9 +47,16 @@ public class UsersActivity extends AppCompatActivity implements UsersView, Users
     RelativeLayout content;
 
     private static final String TAG = UsersActivity.class.getSimpleName();
-    private UsersAdapter adapter;
-    private UsersPresenter presenter;
 
+    @Inject
+    UsersAdapter adapter;
+
+   @Inject
+    UsersPresenter presenter;
+
+    public UsersActivity() {
+
+    }
 
     private Handler handler;
     long delay = 500; // 1 seconds after user stops typing
@@ -58,6 +67,7 @@ public class UsersActivity extends AppCompatActivity implements UsersView, Users
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        setupInjection();
 
         // iniciar oyente de texto modificado
         initTextChangedListener();
@@ -65,10 +75,11 @@ public class UsersActivity extends AppCompatActivity implements UsersView, Users
         // iniciar oyente de acción
         initEditorActionListener();
 
-        this.presenter = new UsersPresenterImpl(this);
+
+        // this.presenter = new UsersPresenterImpl(this);
 
 
-        this.adapter = new UsersAdapter(this);
+        // this.adapter = new UsersAdapter(this);
 
         this.recyclerViewSearchResults.setLayoutManager(new LinearLayoutManager(this));
         //new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(this.recyclerViewSearchResults);
@@ -77,6 +88,11 @@ public class UsersActivity extends AppCompatActivity implements UsersView, Users
         this.presenter.onCreate();
 
 
+    }
+
+    private void setupInjection() {
+        MyApp app = (MyApp) getApplication();
+        app.getUsersComponent(this, this).inject(this);
     }
 
     private void initTextChangedListener() {
@@ -160,7 +176,7 @@ public class UsersActivity extends AppCompatActivity implements UsersView, Users
     @Override
     public void onDataLoaded(List<User> users) {
         adapter.clear();
-        adapter.data(users);
+        adapter.setData(users);
     }
 
     @Override

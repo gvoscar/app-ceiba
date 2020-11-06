@@ -6,8 +6,8 @@ import java.util.List;
 
 import co.com.ceiba.mobile.pruebadeingreso.database.MyDatabase;
 import co.com.ceiba.mobile.pruebadeingreso.features.loader.events.LoaderEvent;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.EventBus;
-import co.com.ceiba.mobile.pruebadeingreso.libs.eventbus.GreenRobotEventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.EventBus;
+import co.com.ceiba.mobile.pruebadeingreso.libs.base.GreenRobotEventBus;
 import co.com.ceiba.mobile.pruebadeingreso.pojos.Post;
 import co.com.ceiba.mobile.pruebadeingreso.pojos.User;
 import co.com.ceiba.mobile.pruebadeingreso.rest.JSONPlaceholderClient;
