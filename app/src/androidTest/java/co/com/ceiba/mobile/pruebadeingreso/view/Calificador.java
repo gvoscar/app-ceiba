@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.com.ceiba.mobile.pruebadeingreso.R;
+import co.com.ceiba.mobile.pruebadeingreso.features.users.ui.UsersActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -34,7 +35,7 @@ import static org.hamcrest.Matchers.endsWith;
 public class Calificador {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<UsersActivity> mActivityTestRule = new ActivityTestRule<>(UsersActivity.class);
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
