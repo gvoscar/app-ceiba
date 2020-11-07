@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -20,9 +21,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.com.ceiba.mobile.pruebadeingreso.R;
@@ -30,8 +28,8 @@ import co.com.ceiba.mobile.pruebadeingreso.app.base.MyApp;
 import co.com.ceiba.mobile.pruebadeingreso.features.posts.ui.PostActivity;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.adapters.UsersAdapter;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.adapters.UsersAdapterListener;
+import co.com.ceiba.mobile.pruebadeingreso.features.users.di.UsersComponent;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.presenters.UsersPresenter;
-import co.com.ceiba.mobile.pruebadeingreso.features.users.presenters.UsersPresenterImpl;
 import co.com.ceiba.mobile.pruebadeingreso.pojos.User;
 
 public class UsersActivity extends AppCompatActivity implements UsersView, UsersAdapterListener {
@@ -47,12 +45,14 @@ public class UsersActivity extends AppCompatActivity implements UsersView, Users
     RelativeLayout content;
 
     private static final String TAG = UsersActivity.class.getSimpleName();
+    @BindView(R.id.contentEmpty)
+    RelativeLayout contentEmpty;
 
-    @Inject
-    UsersAdapter adapter;
-
-   @Inject
-    UsersPresenter presenter;
+    // @Inject
+    private UsersAdapter adapter;
+    // @Inject
+    private UsersPresenter presenter;
+    private UsersComponent component;
 
     public UsersActivity() {
 
@@ -85,14 +85,54 @@ public class UsersActivity extends AppCompatActivity implements UsersView, Users
         //new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(this.recyclerViewSearchResults);
         this.recyclerViewSearchResults.setAdapter(this.adapter);
 
+        this.adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+            @Override
+            public void onChanged() {
+                super.onChanged();
+
+
+                int itemCount = adapter.getItemCount();
+
+                //Log.d(TAG, "onChanged : " + itemCount);
+                if (itemCount <= 0) {
+                    empty(true);
+                } else {
+                    empty(false);
+                }
+            }
+        });
+
         this.presenter.onCreate();
 
 
     }
 
+    private void empty(boolean sw) {
+        if (sw) {
+            recyclerViewSearchResults.setVisibility(View.GONE);
+            contentEmpty.setVisibility(View.VISIBLE);
+        } else {
+            contentEmpty.setVisibility(View.GONE);
+            recyclerViewSearchResults.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void setupInjection() {
         MyApp app = (MyApp) getApplication();
-        app.getUsersComponent(this, this).inject(this);
+        // app.getUsersComponent(this, this).inject(this);
+        component = app.getUsersComponent(this, this);
+        component.inject(this);
+        presenter = getPresenter();
+        adapter = getAdapter();
+    }
+
+    public UsersAdapter getAdapter() {
+        return component.getAdapter();
+    }
+
+    public UsersPresenter getPresenter() {
+        return component.getPresenter();
     }
 
     private void initTextChangedListener() {

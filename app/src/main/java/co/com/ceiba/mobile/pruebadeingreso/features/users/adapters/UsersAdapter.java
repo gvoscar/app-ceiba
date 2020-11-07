@@ -85,10 +85,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public void notFound() {
-
-    }
-
     public void getFilter(CharSequence constraint) {
         Log.d(TAG, "getFilter().    FILTRAR : " + constraint);
         clear();

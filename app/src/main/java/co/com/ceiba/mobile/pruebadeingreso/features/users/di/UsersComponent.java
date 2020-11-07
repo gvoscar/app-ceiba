@@ -4,6 +4,8 @@ package co.com.ceiba.mobile.pruebadeingreso.features.users.di;
 import javax.inject.Singleton;
 
 import co.com.ceiba.mobile.pruebadeingreso.app.di.MyAppModule;
+import co.com.ceiba.mobile.pruebadeingreso.features.users.adapters.UsersAdapter;
+import co.com.ceiba.mobile.pruebadeingreso.features.users.presenters.UsersPresenter;
 import co.com.ceiba.mobile.pruebadeingreso.features.users.ui.UsersActivity;
 import co.com.ceiba.mobile.pruebadeingreso.libs.di.LibsModule;
 import dagger.Component;
@@ -12,4 +14,6 @@ import dagger.Component;
 @Component(modules = {UsersModule.class, LibsModule.class, MyAppModule.class})
 public interface UsersComponent {
     void inject(UsersActivity activity);
+    UsersPresenter getPresenter();
+    UsersAdapter getAdapter();
 }

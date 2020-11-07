@@ -5,6 +5,7 @@ import java.util.List;
 import co.com.ceiba.mobile.pruebadeingreso.pojos.Post;
 import co.com.ceiba.mobile.pruebadeingreso.pojos.User;
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -13,6 +14,9 @@ import retrofit2.http.Path;
  * https://jsonplaceholder.typicode.com/
  */
 public interface JSONPlaceholderService {
+
+    @GET(JSONPlaceholderEndpoint.GET_USERS)
+    Call<List<User>> getUsers();
 
     /**
      * Obtener usuarios
@@ -30,6 +34,9 @@ public interface JSONPlaceholderService {
      */
     @GET(JSONPlaceholderEndpoint.GET_USER_BY_ID)
     Observable<User> usersById(@Path("userId") String userId);
+
+    @GET(JSONPlaceholderEndpoint.GET_USER_BY_ID)
+    Call<User> getUserById(@Path("userId") String userId);
 
     /**
      * Obtener todas las publicaciones

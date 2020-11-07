@@ -1,5 +1,7 @@
 package co.com.ceiba.mobile.pruebadeingreso.app.base;
 
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.multidex.MultiDexApplication;
 
@@ -38,12 +40,19 @@ public class MyApp extends MultiDexApplication {
     }
 
     private void initRealm() {
-        Realm.init(this);
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .name("gvoscar")
-                .schemaVersion(1)
-                .build();
-        Realm.setDefaultConfiguration(realmConfiguration);
+        // SOLUCION TEMP PARA TEST CON REALM & JETPACK : (No hay solucion disponible para el bug)
+        // Exception:
+        // com.getkeepsafe.relinker.MissingLibraryException: Could not find 'librealm-jni.dylib'
+        try {
+            Realm.init(this);
+            RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                    .name("gvoscar")
+                    .schemaVersion(1)
+                    .build();
+            Realm.setDefaultConfiguration(realmConfiguration);
+        } catch (Exception e) {
+            Log.d("MyApp", e.getLocalizedMessage(), e.getCause());
+        }
     }
 
     private void initModules() {
@@ -60,12 +69,4 @@ public class MyApp extends MultiDexApplication {
                 .build();
     }
 
-//    public UsersComponent getUsersComponent(UsersView usersView, UsersAdapterListener usersAdapterListener) {
-//        UsersComponent component = Dagger
-////        return DaggerUsersComponent.builder()
-////                .myAppModule(myAppModule)
-////                .libsModule(libsModule)
-////                .usersModule(new UsersModule(usersView, usersAdapterListener))
-////                .build();
-//    }
 }
