@@ -1,6 +1,6 @@
 # Aplicación de Prueba para Ceiba Software
 
-Esta aplicación listar los usuarios y publicaciones almacenados de localmente y obtenidos desde un Web Services
+Esta aplicación lista los usuarios y sus publicaciones, guardando información localmente y consumiendo un API
 
 ## Nota:
 Esta aplicación usa:
